@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "LloydsDCAutomation": {
+      "commandName": "Project",
+      "commandLineArgs": "\"Drying certificate from Polygon Ref: 469009 Insurer Ref: 102305990\"",
+      "remoteDebugEnabled": false
+    }
+  }
+}
