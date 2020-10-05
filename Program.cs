@@ -36,9 +36,14 @@ namespace LloydsDCAutomation
 
             var driver = new EdgeDriver(options);
 
-
             var wait = new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(40));
+
+
             var elements = new ElementList(driver, wait);
+
+
+            
+
 
 
 
@@ -87,15 +92,9 @@ namespace LloydsDCAutomation
             Thread.Sleep(TimeSpan.FromSeconds(80));
 
             elements.Participants.Click();
-            //var participantLisa = driver.FindElement(By.XPath(
-            //    "/html/body/div[4]/div/div/div/div/div[2]/section/div/div[2]/div[3]/section/div/div/div/div[2]/div/div[2]/div[3]/section/div/div/div/div/div/div[3]/div/div/div/section/div[2]/div[2]/div/div/ul"));
 
 
-
-            var participants =
-
-                driver.FindElement(By.XPath(
-                    "/html/body/div[4]/div/div/div/div/div[2]/section/div/div[2]/div[3]/section/div/div/div/div[2]/div/div[2]/div[3]/section/div/div/div/div/div/div[3]/div/div/div/section/div[2]/div[2]/div/div/ul"));
+            var suppliers = elements.Suppliers();
 
 
             Console.WriteLine(elements.Suppliers());
@@ -104,21 +103,21 @@ namespace LloydsDCAutomation
             elements.Attachments.Click();
             elements.AddAttachments.Click();
 
-            //This is where I'm trying to switch to the popup
 
-            driver.SwitchTo().Frame("id-1601915183555-71");
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            driver.SwitchTo().ActiveElement();
 
-           
+            var frame = driver.SwitchTo().ActiveElement().TagName;
+            Thread.Sleep(TimeSpan.FromSeconds(3));
             elements.DescriptionOfAttachment.SendKeys("Polygon DC");
 
            
 
 
-            elements.attachmentsChooseSupplier.SendKeys(elements.Suppliers());
+            elements.AttachmentsChooseSupplierDropdown.SendKeys(suppliers);
 
 
 
-            Console.WriteLine($"{participants.Text} This is from the p");
 
 
 

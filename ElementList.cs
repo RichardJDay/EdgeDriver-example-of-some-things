@@ -151,15 +151,15 @@ namespace LloydsDCAutomation
             {
                 return _wait.Until(x =>
                     x.FindElement(By.XPath(
-                        "/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[1]/div/div/div/div[2]/div/div/div")));
+                        "/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[1]/div/div/div/div[2]/div/div/div/input")));
             }
         }
 
-        public IWebElement attachmentsChooseSupplier
+        public IWebElement AttachmentsChooseSupplierDropdown
         {
             get
             {
-                return _wait.Until(x => x.FindElement(By.XPath("/html/body/div[1]/div[3]/div/div/ul")));
+                return _wait.Until(x => x.FindElement(By.XPath("/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/label")));
             }
         }
 
@@ -232,13 +232,11 @@ namespace LloydsDCAutomation
             
             foreach (var supplier in polygonSuppliers)
             {
-
                 foreach (var member in membersList)
                 {
                     if (supplier.Contains(member))
                     {
                         polygon = member;
-
                     }
                     else return null;
 
@@ -246,7 +244,7 @@ namespace LloydsDCAutomation
 
             }
 
-           return  polygon;
+            return  polygon;
 
 
 
