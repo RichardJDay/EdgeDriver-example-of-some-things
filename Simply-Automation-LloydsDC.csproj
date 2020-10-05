@@ -6,12 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Pckagereference Include="ChromeDriver.WebDriver" version="85.0.4183.83" />
+    <!--<Pckagereference Include="ChromeDriver.WebDriver" version="85.0.4183.83" />-->
+    <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="85.0.564.41" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="chromedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="MicrosoftWebDriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="MicrosoftWebDriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
