@@ -131,7 +131,7 @@ namespace LloydsDCAutomation
         }
 
 
-      
+
 
 
         public Func<IWebDriver, IWebElement> ElementIsClickable(By locator)
@@ -159,15 +159,15 @@ namespace LloydsDCAutomation
         {
             get
             {
-                return _wait.Until(x => x.FindElement(By.XPath("/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/label")));
+                return _wait.Until(x => x.FindElement(By.XPath("/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div")));
             }
         }
 
 
-        public string Suppliers()
+        public List<string> Suppliers(ReadOnlyCollection<IWebElement> participants)
         {
 
-            var polygonSuppliers = new[]
+            var polygonSuppliers = new List<string>
             {
                 $"Alpine Construction",
                 "Armistead Buildings Services (ABS)",
@@ -212,39 +212,49 @@ namespace LloydsDCAutomation
 
 
 
-            ReadOnlyCollection<IWebElement> participants = this.ParticipantsList.FindElements(By.ClassName("sapMSLITitle"));
 
             List<string> membersList = new List<string> { };
 
-            var polygon = new string("");
 
             foreach (var company in participants)
             {
-                
+
                 string member = company.Text;
 
-                membersList.Add(member);
-                
+                List<string> exists = new List<string> {polygonSuppliers.Find(x => x.Contains(member))};
+
+                return exists;
+                //if ()
+                //{
+                //    membersList.Add(member);
+
+                //}
+
+
 
 
             }
 
-            
-            foreach (var supplier in polygonSuppliers)
-            {
-                foreach (var member in membersList)
-                {
-                    if (supplier.Contains(member))
-                    {
-                        polygon = member;
-                    }
-                    else return null;
+            return membersList;
 
-                }
 
-            }
 
-            return  polygon;
+
+
+            //foreach (var supplier in polygonSuppliers)
+            //{
+            //    foreach (var member in membersList)
+            //    {
+            //        if (supplier.Contains(member))
+            //        {
+            //            polygon = member;
+            //        }
+            //        else return null;
+
+            //    }
+
+            //}
+
 
 
 

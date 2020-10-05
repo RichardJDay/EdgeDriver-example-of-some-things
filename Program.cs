@@ -93,11 +93,14 @@ namespace LloydsDCAutomation
 
             elements.Participants.Click();
 
+            ReadOnlyCollection<IWebElement> participants = elements.ParticipantsList.FindElements(By.ClassName("sapMSLITitle"));
 
-            var suppliers = elements.Suppliers();
 
 
-            Console.WriteLine(elements.Suppliers());
+            var suppliers = elements.Suppliers(participants);
+
+
+            Console.WriteLine(elements.Suppliers(participants));
 
 
             elements.Attachments.Click();
@@ -114,7 +117,7 @@ namespace LloydsDCAutomation
            
 
 
-            elements.AttachmentsChooseSupplierDropdown.SendKeys(suppliers);
+            elements.AttachmentsChooseSupplierDropdown.SendKeys("Roywood");
 
 
 
