@@ -54,7 +54,7 @@ namespace LloydsDCAutomation
 
             elements.Username.SendKeys("F000359");
 
-            elements.Password.SendKeys("Coconut2!");
+            elements.Password.SendKeys("password goes here");
 
             elements.Login.Click();
 
