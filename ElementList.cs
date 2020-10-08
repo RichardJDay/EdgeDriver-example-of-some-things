@@ -145,6 +145,14 @@ namespace LloydsDCAutomation
 
         }
 
+        public IWebElement AttachmentsSupplierDropdown
+        {
+            get
+            {
+                return _wait.Until(x => x.FindElement(By.XPath("/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/label")));
+            }
+        }
+
         public IWebElement DescriptionOfAttachment
         {
             get
@@ -155,15 +163,7 @@ namespace LloydsDCAutomation
             }
         }
 
-        public ReadOnlyCollection<IWebElement> AttachmentsChooseSupplierDropdown
-        {
-            get
-            {
-                var element = _driver.FindElements(By.XPath("/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div"));
-                
-                return element;
-            }
-        }
+       
 
         public IWebElement SearchButton
         {
@@ -183,11 +183,7 @@ namespace LloydsDCAutomation
                     "//*[@id=\"idFileUploader-fu_input-inner\"]"));
             }
         }
-
-
-
-
-
+        
 
         public static bool Contains(string source, string toCheck, StringComparison comp)
         {
@@ -195,144 +191,11 @@ namespace LloydsDCAutomation
         }
 
 
-        public List<string> Suppliers(ReadOnlyCollection<IWebElement> participants)
-        {
+        
 
-            var polygonSuppliers = new List<string>
-            {
-                $"Alpine Construction",
-                "Armistead Buildings Services (ABS)",
-                "Betacove Ltd",
-                "Buildings Validation Solutions Ltd",
-                "Camilleri Construction",
-                "Capital Services",
-                "Crawfords General and Subs - LA",
-                "Crawford & Co General Loss",
-                "Dale Building Maintenance",
-                "EBL GROUP",
-                "Alpine Construction",
-                "Armistead Buildings Services (ABS)",
-                "ABS Cleaning and Restoration Ltd",
-                "Betacove Ltd",
-                "Buildings Validation Solutions Ltd",
-                "Camilleri Construction",
-                "Capital Services",
-                "Clark Contracts Ltd",
-                "Dale Building Maintenance",
-                "EBL GROUP",
-                "Edinmore Contracts Ltd",
-                "Heightvale",
-                "Hemmings & Marshalsea",
-                "HRNL",
-                "Marlowe Industries Ltd",
-                "McCane Construction",
-                "MIDLANDS RESTORATION LTD",
-                "Neways",
-                "North East Building Services Ltd",
-                "Phoenix Building Services",
-                "Reeve Property Restoration Ltd",
-                "Regent Develpoment",
-                "RFM Building Repair LTD",
-                "Roywood Contractors Ltd",
-                "T Denman & Sons Ltd",
-                "TBRN",
-                "The Cotswold Group",
-                "Titan Refurbishments Ltd",
-                "Topmarx Construction Ltd"
-            };
+       
 
-            List<string> membersList = new List<string> { };
-
-
-            foreach (var company in participants)
-            {
-
-                string member = company.Text;
-
-                foreach (string polygonSupplier in polygonSuppliers)
-                {
-                    if (polygonSupplier.Contains(member))
-                    {
-                        membersList.Add(member);
-
-
-                    }
-
-                }
-
-            }
-
-            return membersList;
-
-
-
-
-            //foreach (var supplier in polygonSuppliers)
-            //{
-            //    foreach (var member in membersList)
-            //    {
-            //        if (supplier.Contains(member))
-            //        {
-            //            polygon = member;
-            //        }
-            //        else return null;
-
-            //    }
-
-            //}
-
-
-
-
-        }
-
-        public List<string> PolygonSuppliers()
-        {
-            var polygonSuppliers = new List<string>
-            {
-                $"Alpine Construction",
-                "Armistead Buildings Services (ABS)",
-                "Betacove Ltd",
-                "Buildings Validation Solutions Ltd",
-                "Camilleri Construction",
-                "Capital Services",
-                "Crawfords General and Subs - LA",
-                "Crawford & Co General Loss",
-                "Dale Building Maintenance",
-                "EBL GROUP",
-                "Alpine Construction",
-                "Armistead Buildings Services (ABS)",
-                "ABS Cleaning and Restoration Ltd",
-                "Betacove Ltd",
-                "Buildings Validation Solutions Ltd",
-                "Camilleri Construction",
-                "Capital Services",
-                "Clark Contracts Ltd",
-                "Dale Building Maintenance",
-                "EBL GROUP",
-                "Edinmore Contracts Ltd",
-                "Heightvale",
-                "Hemmings & Marshalsea",
-                "HRNL",
-                "Marlowe Industries Ltd",
-                "McCane Construction",
-                "MIDLANDS RESTORATION LTD",
-                "Neways",
-                "North East Building Services Ltd",
-                "Phoenix Building Services",
-                "Reeve Property Restoration Ltd",
-                "Regent Develpoment",
-                "RFM Group",
-                "Roywood Contractors Ltd",
-                "T Denman & Sons Ltd",
-                "TBRN",
-                "The Cotswold Group",
-                "Titan Refurbishments Ltd",
-                "Topmarx Construction Ltd"
-            };
-            return polygonSuppliers;
-
-        }
+        
     }
 
 }

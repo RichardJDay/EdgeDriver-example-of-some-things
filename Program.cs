@@ -9,7 +9,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-
+using SimplyAutomationLloydsDC;
 
 
 namespace LloydsDCAutomation
@@ -34,7 +34,10 @@ namespace LloydsDCAutomation
 
 
             var elements = new ElementList(driver, wait);
-
+            var attachmentsElementsList = new AttachmentsElementsList(driver, wait);
+            var infoElemtsList = new InfoElementsList(driver, wait);
+            var notesElementsList = new NotesElementsList(driver, wait);
+            var getSuppliersList = new GetSupplierList();
 
 
 
@@ -113,29 +116,28 @@ namespace LloydsDCAutomation
             //Thread.Sleep(TimeSpan.FromSeconds(60));
             elements.AttachmentText.SendKeys(args[1]);
 
-            var participantsDropdown = wait.Until(x => x.FindElement(By.XPath("/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/label")));
-
-            participantsDropdown.Click();
+            elements.AttachmentsSupplierDropdown.Click();
 
 
 
             ReadOnlyCollection<IWebElement> participantsList = elements.ParticipantsList.FindElements(By.XPath("/html/body/div[1]/div[3]/div/div/ul/li"));
-            var suppliers = elements.Suppliers(participantsList);
+            var attachmentsSuppliersList = getSuppliersList.Suppliers(participantsList);
+           
 
 
             var supplierDropdown = wait.Until(x => x.FindElement(By.XPath("//*[@id=\"idSupplierSelect-cont0_1\"]")));
-            var supplierToNotify = suppliers.First();
+            var supplier = attachmentsSuppliersList.First();
 
             var look = driver.SwitchTo().ActiveElement().Text;
 
 
-            var attachmentsSupplierDropdown = driver.FindElement(By.XPath($"//li[text()='{supplierToNotify}']"));
+
+            var attachmentsSupplierDropdown = driver.FindElement(By.XPath($"//li[text()='{supplier}']"));
             attachmentsSupplierDropdown.Click();
 
 
-            var fileUpload = wait.Until(x => x.FindElement(By.XPath("//*[@id=\"idFileUploader-fu\"]")));
 
-            fileUpload.SendKeys($@"c:\temp\{args[1]}.pdf");
+            attachmentsElementsList.FileUpload.SendKeys($@"c:\temp\{args[1]}.pdf");
 
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
@@ -144,27 +146,19 @@ namespace LloydsDCAutomation
 
 
             Console.ReadLine();
-            var notes = wait.Until(x =>
-                x.FindElement(By.XPath(
-                    "/html/body/div[4]/div/div/div/div/div[2]/section/div/div[2]/div[3]/section/div/div/div/div[2]/div/div[2]/div[3]/section/div/div/div/div/div/div[3]/div/div/div/section/div[2]/div[1]/div/div/div[3]/div[1]/span[1]")));
-            notes.Click();
+            
+            notesElementsList.Notes.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(3));
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
 
-            var addNote = wait.Until(x =>
-                x.FindElement(By.XPath(
-                    "/html/body/div[4]/div/div/div/div/div[2]/section/div/div[2]/div[3]/section/div/div/div/div[2]/div/div[2]/div[3]/section/div/div/div/div/div/div[3]/div/div/div/section/div[2]/div[2]/div/div/div[1]/button/div/span")));
-            addNote.Click();
+            notesElementsList.AddNote.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(3));
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
 
-            var notesSupplierNoteDropdown = wait.Until(x =>
-                x.FindElement(By.XPath(
-                    "//*[@id=\"application-ZSupplierSemObj-display-component---detail--idSupplier2-label\"]")));
 
-            notesSupplierNoteDropdown.Click();
+            notesElementsList.NotesSupplierDropdown.Click();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
 
 
@@ -175,23 +169,21 @@ namespace LloydsDCAutomation
 
             var waitforthis = wait.Until(x =>
                 x.FindElement(
-                    By.XPath($"/html/body/div[1]/div[3]/div/div/ul/li[text()='{supplierToNotify}']")));
+                    By.XPath($"/html/body/div[1]/div[3]/div/div/ul/li[text()='{supplier}']")));
             waitforthis.Click();
 
-            var noteTitle = wait.Until(x =>
-                x.FindElement(By.XPath(
-                    "//*[@id=\"application-ZSupplierSemObj-display-component---detail--idNotetabNoteTitle-inner\"]")));
-            noteTitle.SendKeys("Polygon Drying Certificate");
+           
+            notesElementsList.NoteTitle.SendKeys("Polygon Drying Certificate");
 
-            var noteText = wait.Until(x =>
-                x.FindElement(By.XPath(
-                    "//*[@id=\"application-ZSupplierSemObj-display-component---detail--idFeedNote-inner\"]")));
-            noteText.SendKeys("Polygon Drying Certificate");
+            
+            notesElementsList.NoteText.SendKeys("Polygon Drying Certificate");
 
 
             var lookhere = driver.SwitchTo().ActiveElement().TagName;
+            Console.ReadLine();
 
 
+            infoElemtsList.Info.Click();
 
 
             Console.WriteLine("Hello World!");
