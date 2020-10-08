@@ -2,7 +2,7 @@
   "profiles": {
     "LloydsDCAutomation": {
       "commandName": "Project",
-      "commandLineArgs": "\"Drying certificate from Polygon Ref: 469009 Insurer Ref: 102305990\"",
+      "commandLineArgs": "\"Drying certificate from Polygon Ref: 469009 Insurer Ref: 500208594\" \"db9f76f7-91b4-4bc0-b2b8-b17c19b03386\"",
       "remoteDebugEnabled": false
     }
   }

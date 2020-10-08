@@ -155,12 +155,43 @@ namespace LloydsDCAutomation
             }
         }
 
-        public IWebElement AttachmentsChooseSupplierDropdown
+        public ReadOnlyCollection<IWebElement> AttachmentsChooseSupplierDropdown
         {
             get
             {
-                return _wait.Until(x => x.FindElement(By.XPath("/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div")));
+                var element = _driver.FindElements(By.XPath("/html/body/div[1]/div[2]/section/div/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div"));
+                
+                return element;
             }
+        }
+
+        public IWebElement SearchButton
+        {
+            get
+            {
+                return _wait.Until(x =>
+                    x.FindElement(By.XPath(
+                        "/html/body/div[4]/div/div/div/div/div[2]/section/div/div[2]/div[3]/section/div/div/div/div[2]/div/div[2]/div[3]/section/div/div/div/div/div/div[2]/div/div/div/header[2]/div[2]/div/div/form/div[2]")));
+            }
+        }
+
+        public IWebElement AttachmentText
+        {
+            get
+            {
+                return _driver.FindElement(By.XPath(
+                    "//*[@id=\"idFileUploader-fu_input-inner\"]"));
+            }
+        }
+
+
+
+
+
+
+        public static bool Contains(string source, string toCheck, StringComparison comp)
+        {
+            return source.IndexOf(toCheck, comp) >= 0;
         }
 
 
@@ -175,18 +206,18 @@ namespace LloydsDCAutomation
                 "Buildings Validation Solutions Ltd",
                 "Camilleri Construction",
                 "Capital Services",
-                "Clark Contracts Ltd",
                 "Crawfords General and Subs - LA",
+                "Crawford & Co General Loss",
                 "Dale Building Maintenance",
                 "EBL GROUP",
                 "Alpine Construction",
                 "Armistead Buildings Services (ABS)",
+                "ABS Cleaning and Restoration Ltd",
                 "Betacove Ltd",
                 "Buildings Validation Solutions Ltd",
                 "Camilleri Construction",
                 "Capital Services",
                 "Clark Contracts Ltd",
-                "Crawfords General and Subs - LA",
                 "Dale Building Maintenance",
                 "EBL GROUP",
                 "Edinmore Contracts Ltd",
@@ -201,17 +232,14 @@ namespace LloydsDCAutomation
                 "Phoenix Building Services",
                 "Reeve Property Restoration Ltd",
                 "Regent Develpoment",
-                "RFM Group",
+                "RFM Building Repair LTD",
                 "Roywood Contractors Ltd",
                 "T Denman & Sons Ltd",
                 "TBRN",
-                "The Cotswold Group"
+                "The Cotswold Group",
+                "Titan Refurbishments Ltd",
+                "Topmarx Construction Ltd"
             };
-
-
-
-
-
 
             List<string> membersList = new List<string> { };
 
@@ -221,22 +249,20 @@ namespace LloydsDCAutomation
 
                 string member = company.Text;
 
-                List<string> exists = new List<string> {polygonSuppliers.Find(x => x.Contains(member))};
-
-                return exists;
-                //if ()
-                //{
-                //    membersList.Add(member);
-
-                //}
+                foreach (string polygonSupplier in polygonSuppliers)
+                {
+                    if (polygonSupplier.Contains(member))
+                    {
+                        membersList.Add(member);
 
 
+                    }
 
+                }
 
             }
 
             return membersList;
-
 
 
 
@@ -260,6 +286,53 @@ namespace LloydsDCAutomation
 
         }
 
+        public List<string> PolygonSuppliers()
+        {
+            var polygonSuppliers = new List<string>
+            {
+                $"Alpine Construction",
+                "Armistead Buildings Services (ABS)",
+                "Betacove Ltd",
+                "Buildings Validation Solutions Ltd",
+                "Camilleri Construction",
+                "Capital Services",
+                "Crawfords General and Subs - LA",
+                "Crawford & Co General Loss",
+                "Dale Building Maintenance",
+                "EBL GROUP",
+                "Alpine Construction",
+                "Armistead Buildings Services (ABS)",
+                "ABS Cleaning and Restoration Ltd",
+                "Betacove Ltd",
+                "Buildings Validation Solutions Ltd",
+                "Camilleri Construction",
+                "Capital Services",
+                "Clark Contracts Ltd",
+                "Dale Building Maintenance",
+                "EBL GROUP",
+                "Edinmore Contracts Ltd",
+                "Heightvale",
+                "Hemmings & Marshalsea",
+                "HRNL",
+                "Marlowe Industries Ltd",
+                "McCane Construction",
+                "MIDLANDS RESTORATION LTD",
+                "Neways",
+                "North East Building Services Ltd",
+                "Phoenix Building Services",
+                "Reeve Property Restoration Ltd",
+                "Regent Develpoment",
+                "RFM Group",
+                "Roywood Contractors Ltd",
+                "T Denman & Sons Ltd",
+                "TBRN",
+                "The Cotswold Group",
+                "Titan Refurbishments Ltd",
+                "Topmarx Construction Ltd"
+            };
+            return polygonSuppliers;
+
+        }
     }
 
 }
